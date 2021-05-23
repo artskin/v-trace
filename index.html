@@ -10,26 +10,24 @@
   </head>
   <body>
     <v-trace name="轨迹" list="[{
-      url: './assets/images/map01.jpg', 
-      width:'907', 
-      height:'390',
-      devices:[
+      url: './img/map01.png', 
+      width:'727', 
+      height:'917',
+      locusList:[
         {
-          deviceId: 1,
-          deviceName: 'mock设备0',
+          id: 1,
+          name: 'mock设备0',
           points:[200, 96]
         },
         {
-          deviceId: 12,
-          deviceName: 'mock设备1',
+          id: 12,
+          name: 'mock设备1',
           points:[408, 62],
         }
       ]
     }]">地图组件</v-trace>
   
   <script type="module">
-    console.log('ss')
-    
     let imgList= [
       {
         floorName: "隧道地图",

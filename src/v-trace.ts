@@ -14,6 +14,16 @@ export class VTrace extends LitElement {
   @property() name:string ='map'
   @property() list:string = '[]'
 
+  get listArr(){
+    const list = parse(this.list);
+    return list
+  }
+
+  // constructor(){
+  //   super()
+  //   this.
+  // }
+
   get renderHeight(){
     let rHeight = Math.round(this.offsetWidth / 16 *9)+'px';
     this.setAttribute('style',`height:${rHeight}`);
@@ -44,15 +54,22 @@ export class VTrace extends LitElement {
   }
   
   render() {
-    console.log(parse(this.list))
-    console.log(window)
     const {name,renderHeight,loading} = this;
+    console.log(this.listArr[0])
     return html`
       <style>${unsafeCSS(styles)}</style>
       <div class="trace-wrapper">
         <canvas id="pcanvas" class="canvas"></canvas>
         <slot>loading</slot>
-        <trace-item item="" src="/img/map01.png"></trace-item>
+        <ul>
+          ${this.listArr.map((item:IMap,index:number)=>{
+            return html`<li>
+                <trace-item list=${JSON.stringify(item.locusList)} src=${item.url}></trace-item>
+              </li>`
+            }
+          )}
+        </ul>
+        
       </div>`
   }
 }

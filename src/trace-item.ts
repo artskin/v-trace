@@ -5,16 +5,7 @@ import parse from "json5/lib/parse.js"
 import './utils/resize.js'
 import styles from './style.styl'
 
-interface ILocus{
-  id:number,
-  name:string,
-  points:Array<number>
-}
-interface IMap{
-  name:string,
-  url:string,
-  locusList:Array<ILocus>
-}
+
 /**
  * @slot - This element has a slot
  */
@@ -26,46 +17,61 @@ export class TraceItem extends LitElement {
   @property() list:string = '[]'
   @property() src:string = ''
 
-  get renderHeight(){
-    let rHeight = Math.round(this.offsetWidth / 16 *9)+'px';
-    this.setAttribute('style',`height:${rHeight}`);
-    return rHeight
+  constructor(){
+    super()
   }
 
+  // get renderHeight(){
+  //   let rHeight = Math.round(this.offsetWidth / 16 *9)+'px';
+  //   this.setAttribute('style',`height:${rHeight}`);
+  //   return rHeight
+  // }
+  
+
   attributeChangedCallback(name:string,ov:string,nv:string){
+    console.group('attributeChangedCallback')
+    console.log(name,nv)
     if(ov && (nv != ov)){
       
     }
     super.attributeChangedCallback(name, ov, nv);
+    console.groupEnd()
+  }
+  connectedCallback() {
+    console.group('connectedCallback')
+    super.connectedCallback();
+    console.log(this.list)
+    window.addEventListener('resize:end', this._handleResize);
+    console.groupEnd()
   }
 
   _handleResize = (ev:Event) => {
-    this.renderHeight;
+    //this.renderHeight;
   }
   update(changedProps:any) {
+    console.warn('update')
     super.update(changedProps);
   }
-  connectedCallback() {
-    super.connectedCallback();
-    window.addEventListener('resize:end', this._handleResize);
-  }
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    window.removeEventListener('resize:end', this._handleResize);
-  }
-  
   render() {
-    console.log(parse(this.list))
-    console.log(window)
-    const {name,renderHeight,src} = this;
+    console.warn('render')
+    const {name,src,list} = this;
     return html`
       <style>${unsafeCSS(styles)}</style>
       <div class="trace-item-layer">
         <img src=${src} />
         <div class="list">
-          <i class="point"></i>
+          ${parse(list).map((it:ILocus,index:number)=>html`
+            <i class="point" style="transform:translate(${it.points[0]}px,${it.points[1]}px)">
+            <em>${it.name}</em>
+            </i>
+          `)}
         </div>
         <slot></slot>
       </div>`
+  }
+  disconnectedCallback() {
+    console.log('disconnectedCallback')
+    super.disconnectedCallback();
+    window.removeEventListener('resize:end', this._handleResize);
   }
 }

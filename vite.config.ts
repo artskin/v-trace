@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite'
-
+let DEV_MODE = false
 // https://vitejs.dev/config/
 export default defineConfig({
   build: {
