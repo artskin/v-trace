@@ -11,7 +11,7 @@
     "lib": ["esnext", "dom"],
     "types": ["vite/client"],
     "experimentalDecorators":true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": false
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
 }

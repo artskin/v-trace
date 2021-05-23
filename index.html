@@ -6,32 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite App-ts</title>
     <!-- <script src="https://unpkg.com/json5@2.2.0/dist/index.min.js"></script> -->
-    <script type="module" src="/src/main.ts"></script>
+    <script type="module" src="./src/main.js"></script>
   </head>
   <body>
-    <v-trace
-    data='[
-    {
-      "url": "./assets/images/map01.jpg", 
-      "width":"907", 
-      "height":"390",
+    <v-trace name="轨迹" list="[{
+      url: './assets/images/map01.jpg', 
+      width:'907', 
+      height:'390',
       devices:[
         {
           deviceId: 1,
-          deviceName: "mock设备0",
+          deviceName: 'mock设备0',
           points:[200, 96]
         },
         {
           deviceId: 12,
-          deviceName: "mock设备1",
+          deviceName: 'mock设备1',
           points:[408, 62],
         }
       ]
-    }
-    ]'
-    ></v-trace>
+    }]">地图组件</v-trace>
   
-  <script>
+  <script type="module">
+    console.log('ss')
+    
     let imgList= [
       {
         floorName: "隧道地图",
